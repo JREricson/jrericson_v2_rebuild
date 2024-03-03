@@ -15,6 +15,7 @@ ENV PYTHONUNBUFFERED 1
 # install system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends gcc
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  postgresql-13 postgresql-client-13
 
 # lint
 RUN pip install --upgrade pip

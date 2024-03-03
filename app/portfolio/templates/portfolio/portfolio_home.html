@@ -1,0 +1,18 @@
+{% extends "portfolio/portfolio_base.html" %}
+
+{% block content %}
+<h1>Home Page</h1>
+<h2>Page is under construction</h2>
+{% for project in projects %}
+<!-- check for featured items -->
+
+<p>{{ project.title }}</p>
+<p> {{ project.description}}</p>
+<p> {{project.github }}</p>
+<p> {{ project.website}}</p>
+<p> {{project.img_url }}</p>
+<p> {{project.date_posted |date:"Y, F j"}}</p>
+<br>
+{% endfor %}
+
+{% endblock %}

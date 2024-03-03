@@ -1,0 +1,72 @@
+{% extends "portfolio/portfolio_base.html" %}
+{% load markdownify %}
+{% block content %}
+<h1 class="page-heading">Highlighted Projects</h1>
+<h3 class="page-heading">More examples can be found on my <a href="https://github.com/JREricson">github page</a>. </h3>
+
+
+
+<div class="container">
+  {% for project in projects %}
+  <div class="card card-item project-card">
+    <h2 class="project-title"><strong>{{project.title}}</strong></h2>
+    <h4 class="project-desc-short">{{project.description_short|markdownify}}</h4>
+    <img class="project-img" src="{{project.img_url}}"></img>
+
+    {% if project.github %}
+    <h4 class="project-github"><strong> <i class="lab la-github"></i> Github Repo: </strong><a
+        href="{{project.github}}">{{project.github}}</a> </h4>
+    {% endif %}
+
+    <!-- <h4 class="project-website">Project Website: <a href="{{project.website}}" >{{project.website}}</a></h4> -->
+    {% if project.technology %}
+    <h4 class="project-tech"><strong><i class="las la-code"></i>Technologies: </strong>{{project.technology}} </h4>
+    {% endif %}
+    {% if project.concepts %}
+    <h4 class="project-concepts"><strong><i class="las la-lightbulb"></i>Concepts: </strong>{{project.concepts}} </h4>
+    {% endif %}
+
+
+
+
+
+    <!-- <div class="btn-group inline pull-left" > 
+   <button class="btn btn-xs inline">tag1</button>
+   <button class="btn btn-xs">tag2</button>
+   <button class="btn btn-xs">tag3</button>
+    </div> -->
+
+    <a class="btn btn-info" href="{%url 'portfolio:project' project.id %}">See project</a>
+    <br>
+
+  </div>
+  {% endfor %}
+</div>
+
+
+
+<br>
+{% if is_paginated %}
+
+{% if page_obj.has_previous %}
+<a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+{% endif %}
+
+{% for num in page_obj.paginator.page_range %}
+{% if page_obj.number == num %}
+<a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a class="btn btn-outline-info mb-4"
+  href="?page={{ num }}">{{ num }}</a>
+  {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+  <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+  <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+
+  {% endif %}
+
+
+  {% endblock %}

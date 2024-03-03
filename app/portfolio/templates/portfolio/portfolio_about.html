@@ -1,0 +1,148 @@
+{% extends "portfolio/portfolio_base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+<div id="name-header" class="jumbotron bg-cover text-white">
+  <div id="header-name-container" class="container py-5 text-center">
+    <h1 class="display-1 font-weight-bold">John Ericson</h1>
+    <p class="font-italic display-4 mb-0">Software Engineer</p>
+
+
+    </p>
+
+    <a href="{% static 'resume_website.pdf' %}" role="button" class="btn btn-primary px-5 site-btn-link" target="_blank"
+      rel="noopener noreferrer">Resume</a>
+    <a href="{% url 'portfolio:projects' %}" role="button" class="btn btn-primary px-5 site-btn-link" target="_blank"
+      rel="noopener noreferrer">Code Samples</a>
+    <a href="{% url 'portfolio:contact' %}" role="button" class="btn btn-primary px-5 site-btn-link" target="_blank"
+      rel="noopener noreferrer">Contact</a>
+
+  </div>
+</div>
+
+
+
+<!-- ======= Resume Section ======= -->
+<section id="resume" class="resume">
+  <div class="container">
+
+
+
+    <div class="row">
+      <div class="col-lg-6" data-aos="fade-up">
+
+        <h3 class="resume-title">Relevant Professional Experience</h3>
+
+
+        <div class="resume-item">
+          <h4>Freelance Web Engineer</h4>
+          <h5>Consulting, Dec 2022 – Present</h5>
+
+          <p><em>Built websites for clients.</em> </p>
+        </div>
+
+
+
+
+
+        <div class="resume-item">
+          <h4>Contract Backend Development Engineer</h4>
+          <h5>Carterhaugh, Mar 2022 – June 2022</h5>
+
+          <p><em>Primary programmer on a new project that collected information from public sources and transformed
+              through business logic to meet client needs. Administrative user interface was designed using React and
+              Bootstrap. Communication through backend and frontend in monorepo was performed using RPC. </p>
+        </div>
+        <div class="resume-item">
+          <h4>Processing Chemist</em></h4>
+          <h5>Nitto Denko Technical Corporation, May 2013 - Aug 2018</h5>
+          <h6><em></em></h6>
+          <p><em>Development of intellectual property for international team primarily focused on graphene oxide based
+              membranes and antimicrobial films, leading to several patents.</em></p>
+
+        </div>
+
+
+
+
+
+
+        <h3 class="resume-title">Technical Acumen</h3>
+        <div class="resume-item">
+          <h4>Languages</h4>
+          <p><em> Python, Javascript, Typescript, SQL (Postgres). Strong exposure to C, C++, Java, and Bash.</em></p>
+        </div>
+        <div class="resume-item">
+          <h4>Technologies</h4>
+          <p><em> Git, Linux fundamentals, Docker, Django, Node.js, testing frameworks (pytest, junit). </em></p>
+        </div>
+        <div class="resume-item">
+          <h4>Frontend</h4>
+          <p><em> HTML, CSS, Bootstrap, dynamic scripts, React.
+            </em></p>
+        </div>
+        <div class="resume-item">
+          <h4>Interests</h4>
+          <p><em> Rock climbing, programming, photography, scientific inquiry, finding answers to interesting questions.
+            </em></p>
+        </div>
+
+
+
+
+
+
+      </div>
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+
+
+        <h3 class="resume-title">Education</h3>
+
+        <div class="resume-item">
+          <h4>Georgia Tech, MS program</h4>
+          <h5>Sept 2019 - June 2021</h5>
+
+
+          <ul>
+            <li><strong>GPA</strong>: 4.00</li>
+            <li><strong>Coursework</strong>: Operating Systems, Networks, Information Security</li>
+
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <h4>Oregon State and Santa Barbara City College, Core Computer Science Curriculum</h4>
+          <h5>Sept 2019 - June 2021</h5>
+
+
+          <ul>
+            <li><strong>GPA</strong>: 3.94 / Comp. Sci. 4.00</li>
+
+            <li><strong>Activities</strong>: Involvement in competitive programming and computer science clubs.</li>
+            <li><strong>Competitions</strong>: ICPC Southern CA regional 2019.</li>
+
+          </ul>
+        </div>
+        <div class="resume-item">
+          <h4>Hamline University, BS Chemistry</h4>
+          <h5>Sept 2007 - May 20111</h5>
+
+          <ul>
+            <li><strong>Awards</strong>: American Institute of Chemists Award, Beggs, Carter, Mitsch, and Hamline Honors
+              Scholarships.</li>
+          </ul>
+        </div>
+
+
+
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- End Resume Section -->
+{% endblock %}

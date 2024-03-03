@@ -15,13 +15,13 @@ services:
     depends_on:
       - db
   db:
-    image: postgres:15
+    image: postgres:13.2
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
+      - POSTGRES_USER=site_main
+      - POSTGRES_PASSWORD=diff_in_prod
+      - POSTGRES_DB=site_main_dev
 
 volumes:
   postgres_data:
