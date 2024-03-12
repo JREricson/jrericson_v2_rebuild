@@ -1,6 +1,9 @@
 # jrericson_v2_rebuild
 
 
+## site
+### [https://jrericson.com](https://jrericson.com)
+
 ## Project summary
  It currently serves as a portfolio to show code samples and showcase projects that I have been working on. The reason behind the technology used is described in the sections that follow.
 
@@ -9,10 +12,12 @@
 
 ## Project goals
 
-The primary goal was to create a functional portfolio following "good coding practices." In addition, it was to gain more experience with the technology used (Django, Docker, Linode, Postgres, etch). Much of it will be used in other projects. I could have built much of the site in a simpler way. For example, builing in React, hosting on Netlify, or manually entering pages instead using a database and markdown.
+The primary goal was to create a functional portfolio following "good coding practices." In addition, it was to gain more experience with the technology used (Django, Docker, Linode, Postgres, etch). Much of it will be used in other projects. I could have built much of the site in a simpler way. For example, building in React, hosting on Netlify, or manually entering pages instead using a database and markdown.
 
 ## Technology
 Python, Django, markdown, nginx, Docker, Docker-compose, Linode, bash, boostrap, Linux, SSH, Rsync
+
+ ![tech img](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/tech.png)
 
 ## Key Features
 - Live website with https through Letsencrypt certificate authority
@@ -35,7 +40,10 @@ For personal projects, I like to write code where the variable names are descrip
 
 Projects are stored a variety of attributes, such as ranking (used for ordering), a git hub link, a sample image, and a description of the project.
 
-Descriptions are added through the admin console as markdown, which is converted to HTML though a "markdownify`" filter in the UI. This makes adding project description easier and allows me to use similar descriptions as the Github readmes with little modification
+Descriptions are added through the admin console as markdown, which is converted to HTML though a "markdownify`" filter in the UI. This makes adding project description easier and allows me to use similar descriptions as the Github readmes with little modification.
+
+![markdown ex](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/markup_description.png)
+
 
 Projects are displayed and paginated through a Django `Listview`. Project descriptions are displayed using through a Django `Detailview`.
 
@@ -80,14 +88,14 @@ Remote access is done through SSH or with the "Visual Studio Code Remote - SSH" 
 
 Docker has been chosen for the following reasons.
 
-1. It simplifes porting from Development to Production.
-2. It makes it easier to run the Nginx server, the database, the certificate authority and opther services with one another.
+1. It simplifies porting from Development to Production.
+2. It makes it easier to run the Nginx server, the database, the certificate authority and other services with one another.
 
 Docker compose simplifies the process even further. 
 
 Separate Docker/Docker-compose files are provided for the production and local development environments.
 
-## Nginx webserver
+## Nginx Webserver
 Nginx is used to host static content and the site as a reverse proxy.
 
 
@@ -97,7 +105,7 @@ I previously had `send_mail()` send emails to my primary address. However, Googl
 
 ## Git Usage
 
-I use branching similar to the "git_flow" method. There is a production branch and a development branche for features that get pushed into it.
+I use branching similar to the "git_flow" method. There is a production branch and a development branch for features that get pushed into it.
 
 
 ## Simplifying development
