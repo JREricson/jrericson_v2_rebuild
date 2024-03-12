@@ -5,11 +5,13 @@ version: '3.8'
 services:
   web:
     build: ./app
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn site_main.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - ./app/:/usr/src/app/
-    ports:
-      - 8000:8000
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    expose:
+      - 8000
     env_file:
       - ./.env.dev
     depends_on:
@@ -22,6 +24,18 @@ services:
       - POSTGRES_USER=site_main
       - POSTGRES_PASSWORD=diff_in_prod
       - POSTGRES_DB=site_main_dev
+  nginx:
+    build: ./nginx_dev
+    ports:
+      - 1337:80
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    depends_on:
+      - web
 
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:

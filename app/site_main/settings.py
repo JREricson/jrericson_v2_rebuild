@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = bool(os.environ.get("DEBUG", default=0))
+DEBUG = bool(os.environ.get("DEBUG", default=False))
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
@@ -45,12 +45,14 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "dbbackup",
     "storages",
+    "corsheaders",
     # my apps
     "upload",
     "portfolio",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",  # cors
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -168,6 +170,9 @@ MARKDOWNIFY = {
             "strong",
             "ul",
             "img",
+            "pre",
+            "code",
+            "samp",
         ],
         "MARKDOWN_EXTENSIONS": [
             "markdown.extensions.fenced_code",
@@ -177,6 +182,7 @@ MARKDOWNIFY = {
             "src",
             "alt",
         ],
+        # "BLEACH": False # would remove sanitation
     },
     "alternative": {
         "WHITELIST_TAGS": [
@@ -221,27 +227,27 @@ LOGGING = {
 ######################
 USE_S3 = os.getenv("USE_S3") == "TRUE"
 
-if USE_S3:
-    # aws settings
-    AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-    AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
-    AWS_DEFAULT_ACL = None
-    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
-    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
-    # s3 static settings
-    STATIC_LOCATION = "static"
-    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
-    STATICFILES_STORAGE = "storage_backends.StaticStorage"
-    # s3 public media settings
-    PUBLIC_MEDIA_LOCATION = "media"
-    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/"
-    DEFAULT_FILE_STORAGE = "storage_backends.PublicMediaStorage"
-else:
-    STATIC_URL = "/staticfiles/"
-    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-    MEDIA_URL = "/mediafiles/"
-    MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
+# if USE_S3:
+#     # aws settings
+#     AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+#     AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+#     AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+#     AWS_DEFAULT_ACL = None
+#     AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+#     AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
+#     # s3 static settings
+#     STATIC_LOCATION = "static"
+#     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
+#     STATICFILES_STORAGE = "storage_backends.StaticStorage"
+#     # s3 public media settings
+#     PUBLIC_MEDIA_LOCATION = "media"
+#     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/"
+#     DEFAULT_FILE_STORAGE = "storage_backends.PublicMediaStorage"
+# else:
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+MEDIA_URL = "/mediafiles/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
@@ -272,4 +278,4 @@ GMAIL_SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "path_to_your_.json_credential_file"
 
 
-ADMIN_PAGE = EMAIL_PORT = os.environ.get("ADMIN_PAGE_LOCATION")
+ADMIN_PAGE = os.environ.get("ADMIN_PAGE_LOCATION")

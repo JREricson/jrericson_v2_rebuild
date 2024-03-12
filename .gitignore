@@ -146,8 +146,15 @@ GitHub.sublime-settings
 
 # confidential
 .env.*
+credentials/
+backup/
+resume*
+project_descriptions/
+
+
 
 # unneeded
 db.sqlite3
-
-
+app/staticfiles/
+commands.txt
+conf_notes.txt
