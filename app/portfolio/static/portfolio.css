@@ -184,3 +184,10 @@ ul {
 .page-heading {
   text-align: center;
 }
+
+
+.project-content{
+  max-width: 980px;
+  background: #2f2f33;
+  margin: auto;
+}
