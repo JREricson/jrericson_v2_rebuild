@@ -1,7 +1,4 @@
 # jrericson_v2_rebuild
-
-
-## site
 ### [https://jrericson.com](https://jrericson.com)
 
 ## Project summary
@@ -15,7 +12,7 @@
 The primary goal was to create a functional portfolio following "good coding practices." In addition, it was to gain more experience with the technology used (Django, Docker, Linode, Postgres, etch). Much of it will be used in other projects. I could have built much of the site in a simpler way. For example, building in React, hosting on Netlify, or manually entering pages instead using a database and markdown.
 
 ## Technology
-Python, Django, markdown, nginx, Docker, Docker-compose, Linode, bash, boostrap, Linux, SSH, Rsync
+Python, Django, markdown, nginx, Docker, Docker-compose, Linode, bash, boostrap, Linux, SSH, Rsync.
 
  ![tech img](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/tech.png)
 
@@ -49,12 +46,15 @@ Projects are displayed and paginated through a Django `Listview`. Project descri
 
 ## Security 
 
-- **Firewall**: SFW is used to further restrict access to site.
+- **Firewall**: Using ufw to further restrict access to site.
+  
+  ![](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/ufw%20status.png)
 - **SSH key**: Access to host is restricted through SSH key. Password and root access is disabled.
 - **One way access to S3 buckets** - The system is only able to write to S3 buckets, ensuring that no data can be over written.
 - **Cors**: For trusted origins in Django.
 - **Hidden access points**: The Admin portal is accessed via a hidden location.
 - **HTTPS**: Using Letsencrypt certificate authority.
+   ![](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/secure_dns.png)
 - **Other standard Practices:** Including sanitation, `.env` files, and `.gitignore` files.
 
 
@@ -105,7 +105,7 @@ I previously had `send_mail()` send emails to my primary address. However, Googl
 
 ## Git Usage
 
-I use branching similar to the "git_flow" method. There is a production branch and a development branch for features that get pushed into it.
+I use branching similar to the [git_flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow#:~:text=What%20is%20Gitflow%3F,by%20Vincent%20Driessen%20at%20nvie.) method. There is a production branch and a development branch for features that get pushed into it.
 
 
 ## Simplifying development
@@ -119,3 +119,6 @@ The structure and design choice for the site were heavily based on the following
 
 - https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
 - https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/
+
+
+
