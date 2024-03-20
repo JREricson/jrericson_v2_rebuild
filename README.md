@@ -54,6 +54,7 @@ Projects are displayed and paginated through a Django `Listview`. Project descri
 - **Cors**: For trusted origins in Django.
 - **Hidden access points**: The Admin portal is accessed via a hidden location.
 - **HTTPS**: Using Letsencrypt certificate authority.
+  
    ![](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/secure_dns.png)
 - **Other standard Practices:** Including sanitation, `.env` files, and `.gitignore` files.
 
