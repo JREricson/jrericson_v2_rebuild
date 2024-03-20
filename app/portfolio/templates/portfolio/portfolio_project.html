@@ -1,7 +1,8 @@
 {% extends "portfolio/portfolio_base.html" %}
 {% load markdownify %}
 {% block content %}
-<div class="container-fluid project-desc-container">
+<br>
+<div class="container-fluid project-desc-container project-content">
 
 
     <h1 class="page-heading">{{object.title}}</h1>
@@ -12,7 +13,7 @@
 
 
     {% if object.github%}
-    <p><Strong><i class="lab la-github"></i>Github Repo: </Strong> <a href="{{object.website}}">{{object.github}}</a>
+    <p><Strong><i class="lab la-github"></i>Github Repo: </Strong> <a href="{{object.github}}">{{object.github}}</a>
     </p>
     {% endif %}
 
