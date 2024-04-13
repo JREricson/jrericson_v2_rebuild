@@ -26,7 +26,7 @@ Python, Django, markdown, nginx, Docker, Docker-compose, Linode, bash, boostrap,
   
 ## Coding style
 
-For personal projects, I like to write code where the variable names are descriptive enough to tell a programmer not familiar with the language enough of what is going on. Comments are kept to a minimum and only included where explaining something that would not be clear. There are many additional `# TODO` comments here, but I prefer to avoid having as  many in production.
+For personal projects, I like to write code where the variable names are descriptive enough to tell a programmer not familiar with the language enough of what is going on. Comments are kept to a minimum and only included where explaining something that would not be clear. There are many additional `# TODO` comments here, but I prefer to avoid having as many in production.
 
 
 ## Site structure

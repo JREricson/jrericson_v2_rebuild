@@ -158,3 +158,5 @@ db.sqlite3
 app/staticfiles/
 commands.txt
 conf_notes.txt
+TODO.txt
+dev_notes.txt
