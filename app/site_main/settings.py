@@ -279,3 +279,4 @@ GMAIL_SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
 
 ADMIN_PAGE = os.environ.get("ADMIN_PAGE_LOCATION")
+SESSION_COOKIE_SECURE = True
