@@ -1,7 +1,7 @@
 from django.urls import path
-from django.views.generic import TemplateView
+
 from . import views as portfolio_views
-from .views import ProjectListView, ProjectDetailView
+from .views import ProjectDetailView, ProjectListView
 
 
 app_name = "portfolio"

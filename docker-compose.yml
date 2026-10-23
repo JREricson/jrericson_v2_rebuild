@@ -1,13 +1,10 @@
 
-
-version: '3.8'
-
 services:
   web:
     build: ./app
-    command: gunicorn site_main.wsgi:application --bind 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./app/:/usr/src/app/
+      - ./app/:/home/app/web/
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
     expose:

@@ -1,5 +1,4 @@
-from django.shortcuts import redirect, render
-from portfolio import views as profile_views
+from django.shortcuts import redirect
 
 
 def landing_page(request):

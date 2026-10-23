@@ -29,7 +29,7 @@ def home(request):
 
 
 def contact(request):
-    return redirect('https://www.linkedin.com/in/john-ericson-58005938/')
+    return redirect("https://www.linkedin.com/in/john-ericson-58005938/")
     # if request.method == "POST":
     #     form = PortfolioContactForm(request.POST)
     #     if form.is_valid():
