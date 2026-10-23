@@ -8,24 +8,29 @@ dkcleanup() {
 alias docker-compose='docker compose'
 
 addownership() {
-    sudo chown -R zuser:zuser "$1"
+    sudo chown -R "$USER:$USER" "$1"
 }
 
 prod() {
     docker-compose -f docker-compose.prod.yml "$@"
 }
 
+stage() {
+    docker-compose -f docker-compose.staging.yml "$@"
+}
+
 dcprodudb() {
-    docker-compose -f docker-compose.prod.yml up -d --build
+    prod up -d --build
 }
 
 prodcollectstatic() {
-    docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
+    prod exec web python manage.py collectstatic --no-input --clear
 }
 
 devcreatesu() {
     docker-compose exec web python manage.py createsuperuser
 }
+
 devmigrate() {
     docker-compose exec web python manage.py migrate --noinput
 }
@@ -38,15 +43,22 @@ devmanpy() {
     docker-compose exec web python manage.py "$@"
 }
 
-alias docker-compose='docker compose'
+devlint() {
+    # root: bind-mounted files are owned by the host user
+    docker-compose exec -u root web black .
+    docker-compose exec -u root web flake8 .
+}
+
+devtest() {
+    docker-compose exec -u root web pytest -p no:cacheprovider
+}
 
 proxyrebuild() {
-    # docker-compose -f docker-compose.staging.yml down -v
-    docker-compose -f docker-compose.staging.yml up -d --build
-    docker-compose exec web python manage.py makemigrations --noinput
-    docker-compose exec web python manage.py migrate --noinput
-    docker-compose exec web python manage.py collectstatic --no-input --clear
-    docker-compose logs -f
+    # stage down -v
+    stage up -d --build
+    stage exec web python manage.py migrate --noinput
+    stage exec web python manage.py collectstatic --no-input --clear
+    stage logs -f
 }
 
 devrebuild() {
@@ -63,23 +75,34 @@ devup() {
 }
 
 stagebackup() {
-    docker-compose -f docker-compose.staging.yml exec web python manage.py dbbackup
+    stage exec web python manage.py dbbackup
 }
 
 prodbackup() {
-    docker-compose -f docker-compose.prod.yml exec web python manage.py dbbackup
+    prod exec web python manage.py dbbackup
+}
+
+prodrestore() {
+    echo y | prod exec -T web python manage.py dbrestore
+}
+
+stagerestore() {
+    echo y | stage exec -T web python manage.py dbrestore
 }
 
 prodrebuild() {
-    # docker-compose -f docker-compose.prod.yml down -v
-    docker-compose -f docker-compose.prod.yml up -d --build
-    docker-compose exec web python manage.py makemigrations --noinput
-    docker-compose exec web python manage.py migrate --noinput
-    docker-compose exec web python manage.py collectstatic --no-input --clear
-    # echo y |docker-compose exec web python manage.py dbrestore
-    docker-compose logs -f
+    # prod down -v
+    prod up -d --build
+    prod exec web python manage.py migrate --noinput
+    prod exec web python manage.py collectstatic --no-input --clear
+    # prodrestore
+    prod logs -f
 }
 
 transfertoServer() {
-    rsync -avzh /home/zuser/programming/websites/jrericson_v2 --exclude /home/zuser/programming/websites/jrericson_v2/app/venv site@172.232.163.66:jrericson/
+    # trailing slash on source = copy contents into jrericson/, not a nested jrericson_v2/
+    rsync -avzh /home/puser/programming/websites/jrericson_v2/ \
+      --exclude app/venv \
+      --exclude .git \
+      mywebsite:jrericson/
 }

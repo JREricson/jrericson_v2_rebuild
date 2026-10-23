@@ -3,7 +3,7 @@
 ###########
 
 # pull official base image
-FROM python:3.11.4-bullseye as builder
+FROM python:3.11-bookworm AS builder
 
 # set work directory
 WORKDIR /usr/src/app
@@ -32,7 +32,7 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requir
 #########
 
 # pull official base image
-FROM python:3.11.4-bullseye 
+FROM python:3.11-bookworm 
 
 # create directory for the app user
 RUN mkdir -p /home/app
@@ -48,13 +48,17 @@ RUN mkdir $APP_HOME/staticfiles
 RUN mkdir $APP_HOME/mediafiles
 WORKDIR $APP_HOME
 
-# install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends netcat
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  postgresql-13 postgresql-client-13
+# install dependencies (client only — Postgres server runs in the db service)
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    netcat-openbsd \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
+COPY ./requirements-dev.txt .
 RUN pip install --upgrade pip
 RUN pip install --no-cache /wheels/*
+RUN pip install --no-cache -r requirements-dev.txt
 
 # copy entrypoint.sh
 COPY ./entrypoint.sh .
@@ -70,5 +74,5 @@ RUN chown -R app:app $APP_HOME
 # change to the app user
 USER app
 # run entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+ENTRYPOINT ["/home/app/web/entrypoint.sh"]
 

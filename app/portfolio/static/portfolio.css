@@ -4,18 +4,42 @@
   }
 } */
 
-#name-header {
-  /* background: url('codeImage.jpg'); */
+#name-header,
+.project-detail-intro {
+  background:
+    radial-gradient(ellipse 75% 55% at 50% 10%, rgba(50, 118, 212, 0.55), transparent 55%),
+    linear-gradient(180deg, #323840 0%, #25282c 40%, #1e2021 78%, #1e2021 100%);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  box-shadow: none;
+}
 
+#name-header #header-name-container {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
 
+#name-header h1,
+.project-detail-intro .page-heading {
+  color: #fff;
+  text-shadow: 0 2px 28px rgba(50, 118, 212, 0.55);
+}
 
+#name-header .display-4 {
+  color: #e8f1fc;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.25rem !important;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
 }
 
 .site-btn-link {
   margin: 0.4rem;
+}
+
+.navbar.bg-dark {
+  background-color: #16181a !important;
+  border-bottom: 1px solid rgba(50, 118, 212, 0.45);
 }
 
 /* #header-name-container{
@@ -36,6 +60,25 @@ p {
 /*--------------------------------------------------------------
 # Resume
 --------------------------------------------------------------*/
+/* Bootswatch 4 + Bootstrap 5 conflict can break .row floats/flex;
+   keep Experience | Education side-by-side on md+ */
+@media (min-width: 768px) {
+  .resume > .container > .row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 2.5rem;
+  }
+
+  .resume > .container > .row > [class*="col-"] {
+    flex: 1 1 0;
+    max-width: none;
+    width: auto;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
 .resume .resume-title {
   font-size: 26px;
   font-weight: 700;
@@ -66,6 +109,12 @@ p {
   display: inline-block;
   font-weight: 600;
   margin-bottom: 10px;
+  color: #cdc9c5;
+}
+
+.resume .resume-item p {
+  padding-left: 15px;
+  margin-bottom: 0.5rem;
   color: #cdc9c5
 }
 
@@ -95,51 +144,246 @@ p {
 }
 
 
-/* project page */
-.project-desc-container img {
-  width: 90%;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.project-desc-container project-title {
+/* project detail page */
+.project-detail-intro {
+  padding: 3.5rem 1rem;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
+.project-detail-section-title {
+  color: #cdc9c5;
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.project-detail-body {
+  margin-top: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: #b3b3b3;
+  line-height: 1.65;
+  max-width: 48rem;
+  text-align: left;
+  width: 100%;
+}
+
+.project-detail {
+  padding-bottom: 5.5rem;
+}
+
+.project-back-bar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5.5rem;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 0.85rem;
+  box-sizing: border-box;
+  background: linear-gradient(
+    to bottom,
+    rgba(30, 32, 33, 0) 0%,
+    rgba(30, 32, 33, 0.85) 45%,
+    #1e2021 70%
+  );
+  pointer-events: none;
+}
+
+.project-back-bar .project-back-btn {
+  pointer-events: auto;
+}
+
+.project-back-btn {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.project-back-btn i {
+  margin-right: 0.25rem;
+  vertical-align: middle;
+}
+
+.project-desc-container.project-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-desc-container .project-detail-section-title,
+.project-desc-container .project-detail-link {
+  text-align: left;
+  width: 100%;
+  max-width: 48rem;
+}
+
+.project-detail-body h2 {
+  color: #cdc9c5;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(50, 118, 212, 0.35);
+}
+
+.project-detail-body h3 {
+  color: #cdc9c5;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-detail-body p {
+  color: #b3b3b3;
+  margin-bottom: 1rem;
+}
+
+.project-detail-body ul,
+.project-detail-body ol {
+  color: #b3b3b3;
+  padding-left: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+.project-detail-body li {
+  color: #b3b3b3;
+  margin-bottom: 0.4rem;
+}
+
+.project-detail-body li::marker {
+  color: #3276d4;
+}
+
+.project-detail-body strong {
+  color: #e0dcd8;
+  font-weight: 600;
+}
+
+.project-detail-body code {
+  background: rgba(50, 118, 212, 0.15);
+  color: #d7e6f8;
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.project-detail-body a {
+  color: #6ea8fe;
+}
+
+.project-detail-body a:hover {
+  color: #9ec5fe;
+}
+
+.project-detail-body img {
+  border: 1px solid rgba(50, 118, 212, 0.25);
+}
+
+.project-detail-link {
+  color: #cdc9c5;
+  margin: 0.5rem 0;
+}
+
+.project-detail-link a {
+  color: #6ea8fe;
+  word-break: break-all;
+}
+
+.project-detail-link a:hover {
+  color: #9ec5fe;
+}
+
 .project-desc-container img {
+  width: 90%;
+  max-width: 48rem;
+  padding-left: 20px;
+  padding-right: 20px;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   margin-right: auto;
   margin-left: auto;
+  display: block;
+  border-radius: 6px;
 }
 
 .project-desc-short {
-  padding: .4em
+  padding: 0.4em;
+  color: #b3b3b3;
 }
 
+.projects-intro {
+  background-color: #2a2e33;
+  padding: 2.5rem 1rem 2rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
 
+.projects-intro .page-heading {
+  color: #cdc9c5;
+}
 
-/* project page */
+.projects-subtitle {
+  color: #b3b3b3;
+}
+
+.projects-intro .projects-subtitle a {
+  color: #6ea8fe;
+}
+
+.projects-intro .projects-subtitle a:hover {
+  color: #9ec5fe;
+}
+
+.projects-subtitle a,
+.project-card a {
+  color: #6ea8fe;
+}
+
+.projects-subtitle a:hover,
+.project-card a:hover {
+  color: #9ec5fe;
+}
 
 .project-img {
   width: 50%;
+  max-width: 28rem;
   display: block;
   margin-left: auto;
   margin-right: auto;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  border-radius: 6px;
 }
-
-/* .project-title {
- text-align: center;
-
-} */
 
 .project-card {
   text-align: center;
-  background-color: #242424;
+  background-color: #25282b;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+  border: none;
+  border-radius: 4px;
+  padding: 1.25rem 1rem 1.5rem;
+}
+
+.project-meta {
+  display: inline-block;
+  font-size: 0.95rem;
+  padding: 5px 15px;
+  margin: 0.35rem;
+  background: rgba(50, 118, 212, 0.15);
+  border-radius: 4px;
+  color: #cdc9c5;
+}
+
+.projects-pagination {
+  text-align: center;
+  padding: 1rem 0 2rem;
 }
 
 
@@ -183,11 +427,12 @@ ul {
 
 .page-heading {
   text-align: center;
+  color: #cdc9c5;
 }
 
 
 .project-content {
   max-width: 1080px;
-  background: #2f2f33;
+  background: transparent;
   margin: auto;
 }

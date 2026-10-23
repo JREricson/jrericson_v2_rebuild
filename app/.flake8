@@ -1,0 +1,18 @@
+[flake8]
+max-line-length = 88
+extend-ignore = E203, W503
+exclude =
+    .git,
+    __pycache__,
+    */migrations/*,
+    venv,
+    .venv,
+    staticfiles,
+    mediafiles
+per-file-ignores =
+    portfolio/views.py:F401,E501
+    portfolio/forms*.py:E501
+    site_main/settings.py:E501
+    upload/admin.py:F401
+    upload/models.py:F401
+    upload/tests.py:F401

@@ -1,34 +1,37 @@
 {% extends "portfolio/portfolio_base.html" %}
 {% load markdownify %}
 {% block content %}
-<br>
-<div class="container-fluid project-desc-container project-content">
+<div class="project-detail">
+  <div class="project-detail-intro">
+    <h1 class="page-heading">{{ object.title }}</h1>
+  </div>
 
-
-    <h1 class="page-heading">{{object.title}}</h1>
-
+  <div class="container project-desc-container project-content">
     {% if object.website or object.github %}
-    <h2>External Links </h2>
+    <h2 class="project-detail-section-title">External Links</h2>
     {% endif %}
 
-
-    {% if object.github%}
-    <p><Strong><i class="lab la-github"></i>Github Repo: </Strong> <a href="{{object.github}}">{{object.github}}</a>
+    {% if object.github %}
+    <p class="project-detail-link"><strong><i class="lab la-github"></i> Github Repo:</strong>
+      <a href="{{ object.github }}">{{ object.github }}</a>
     </p>
     {% endif %}
 
-    {% if object.website%}
-    <p><Strong><i class="las la-external-link-square-alt"></i>Live website: </Strong> <a
-            href="{{object.website}}">{{object.website}}</a></p>
+    {% if object.website %}
+    <p class="project-detail-link"><strong><i class="las la-external-link-square-alt"></i> Live website:</strong>
+      <a href="{{ object.website }}">{{ object.website }}</a>
+    </p>
     {% endif %}
 
-
-    {{object.description|markdownify}}
-
-
+    <div class="project-detail-body">
+      {{ object.description|markdownify }}
+    </div>
+  </div>
 </div>
 
-
-
-
+<div class="project-back-bar">
+  <a class="btn btn-primary project-back-btn" href="{% url 'portfolio:projects' %}">
+    <i class="las la-arrow-circle-left"></i> Back to projects
+  </a>
+</div>
 {% endblock %}
