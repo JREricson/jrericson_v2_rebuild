@@ -2,121 +2,141 @@
 ### [https://jrericson.com](https://jrericson.com)
 
 ## Project summary
- It currently serves as a portfolio to show code samples and showcase projects that I have been working on. The reason behind the technology used is described in the sections that follow.
+This site is a portfolio for code samples and projects I’ve worked on. The technology choices are explained in the sections below.
+
+![site home](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/refs/heads/main/documentation/about_page.png)
 
 
- ![site home](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/cover_photo.png)
+### Project year
+- **2024** 
 
-## Project goals
 
-The primary goal was to create a functional portfolio following "good coding practices." In addition, it was to gain more experience with the technology used (Django, Docker, Linode, Postgres, etch). Much of it will be used in other projects. I could have built much of the site in a simpler way. For example, building in React, hosting on Netlify, or manually entering pages instead using a database and markdown.
+### Project goals
+
+**Primary goal** — Create a functional portfolio following good coding practices.
+
+**Secondary goal** — Gain more experience with the technology used (Django, Docker, Linode, PostgreSQL, etc.).
 
 ## Technology
-Python, Django, markdown, nginx, Docker, Docker-compose, Linode, bash, boostrap, Linux, SSH, Rsync.
+Python, Django, Markdown, Nginx, Docker, Docker Compose, Linode, Bash, Bootstrap, Linux, SSH, Rsync.
 
  ![tech img](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/tech.png)
 
 ## Key Features
-- Live website with https through Letsencrypt certificate authority
-- S3 storage
-- Database backups
-- Deployment through remote Linux server
-- Docker Container based deployment and development
-- Email based contact form (depreciated)
+- **HTTPS** through Let's Encrypt certificate authority
+  ![secure https](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/refs/heads/main/documentation/secure_dns.png)
+
+- **S3 storage** for database backups
+  ![s3 storage](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/s3_backup.png)
+- Deployment on a remote Linux server
+- Docker container-based deployment and development
+![containers](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/refs/heads/main/documentation/containers.png)
+
+
+- Email-based contact form re-routing to my in box (deprecated)
+  - No longer implemented
+
+### AI usage
+Most of this code was written before I introduced agentic AI into my coding practices.
+I have used AI in later versions, primarily for styling.
   
-## Coding style
-
-For personal projects, I like to write code where the variable names are descriptive enough to tell a programmer not familiar with the language enough of what is going on. Comments are kept to a minimum and only included where explaining something that would not be clear. There are many additional `# TODO` comments here, but I prefer to avoid having as many in production.
-
-
 ## Site structure
-
-
 
 ### Projects Model
 
-Projects are stored a variety of attributes, such as ranking (used for ordering), a git hub link, a sample image, and a description of the project.
+Projects are stored with a variety of attributes, such as ranking (used for ordering), a GitHub link, a sample image, and a description of the project.
 
-Descriptions are added through the admin console as markdown, which is converted to HTML though a "markdownify`" filter in the UI. This makes adding project description easier and allows me to use similar descriptions as the Github readmes with little modification.
+![project schema](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/project_schema.png)
+
+Project descriptions are written in Markdown.
+- Converted to HTML using the `markdownify` library
+- Convenience
+    - Easy to write
+    - Easy to transfer info from READMEs in GitHub repos
+- New projects are added through the admin console
 
 ![markdown ex](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/markup_description.png)
 
+Projects are displayed and paginated through a Django `ListView`. Project descriptions are displayed using a Django `DetailView`.
 
-Projects are displayed and paginated through a Django `Listview`. Project descriptions are displayed using through a Django `Detailview`.
+## Security
 
-## Security 
-
-- **Firewall**: Using ufw to further restrict access to site.
-  
+- **Firewall**: Using UFW to further restrict access to the site.
   ![](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/ufw%20status.png)
-- **SSH key**: Access to host is restricted through SSH key. Password and root access is disabled.
-- **One way access to S3 buckets** - The system is only able to write to S3 buckets, ensuring that no data can be over written.
-- **Cors**: For trusted origins in Django.
+- **SSH key**: Access to the host is restricted through an SSH key. Password and root access are disabled.
+- **One-way access to S3 buckets** — The system is only able to write to S3 buckets, ensuring that no data can be overwritten.
+- **CORS**: For trusted origins in Django.
 - **Hidden access points**: The Admin portal is accessed via a hidden location.
-- **HTTPS**: Using Letsencrypt certificate authority.
-  
-   ![](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/secure_dns.png)
-- **Other standard Practices:** Including sanitation, `.env` files, and `.gitignore` files.
+- **HTTPS**: Using Let's Encrypt certificate authority.
 
+- **Other standard practices:** Including sanitization, `.env` files, and `.gitignore` files.
 
 
 ## Backups
-The Application uses "django-dbbackup" which provides a wrapper over Postgres's `pg_dump`. Backups are currently run manually after updating content. A previous version of the site used **cron jobs**. It is possible that I will automate it with Celery in the future. All backups are stored externally in an S3 Bucket as described below.
+- Done with a manual checkpointing method
+  - Uses `django-dbbackup`, which provides a wrapper over Postgres's `pg_dump`.
+  - All backups are stored externally in an S3 bucket as described below.
+  - A previous version of the site used **cron jobs** to do this
 
-Linode offers backup services, which I am not paying for. Restoring the system would be as easy as starting the Docker image, running migrations and similar operations, then and using the command in django-dbbackup to restore the data base. This allows allows for easier portability if I want to run locally or on a different site.
+- Design decision
+  - Backups could be done with a managed database
+  - Implemented this way for zero financial cost and simplicity
 
 
 ## S3 storage
+- Used as blob storage for backups
+- Chosen due to familiarity
 
-S3 is utilized to store all backups. The site is set up to store other content there if desired for future additions to the site or in similar sites that share the same reusable structure.
+## Database: PostgreSQL
 
-
-## Database: PostgresSQL
-
-PostgresSQL was chosen as I am most familiar with this favor of SQL and it is a free option.
+- Why PostgreSQL:
+  - Cheap, easy, and familiar
+  - Wanted SQL
 
 
 ## UI
-Bootstrap was chosen for simplicity. The "Darkly" theme from Bootswatch to make the site less like generic bootstrap. I prefer dark themes for my eyes. Because it is my site, it will not have a light theme.
+- Bootstrap was chosen for simplicity.
+- Uses the "Darkly" theme from Bootswatch to make the site less like generic Bootstrap.
+- Dark by default.
 
-## Site hosting 
+## Site hosting
 
-An Ubuntu server (LTS) was chosen as I am familiar with Debian distributions.
+- Ubuntu server (LTS) using Linode: I am familiar with Debian distributions.
+- Single node
+- Remote access:
+  - SSH
+  - "Visual Studio Code Remote - SSH" extension
+  - Rsync (or SCP) for file transfers
 
-Remote access is done through SSH or with the "Visual Studio Code Remote - SSH" extension. Files are transferred using Rsync
+## Docker and Docker Compose
+Docker has been chosen to run the site for the following reasons.
 
-## Docker and Docker-compose
+1. It simplifies porting from development to production.
+2. It makes it easier to run the Nginx server, the database, the certificate authority, and other services with one another.
 
-Docker has been chosen for the following reasons.
+Separate Docker/Docker Compose files are provided for the production and local development environments.
 
-1. It simplifies porting from Development to Production.
-2. It makes it easier to run the Nginx server, the database, the certificate authority and other services with one another.
-
-Docker compose simplifies the process even further. 
-
-Separate Docker/Docker-compose files are provided for the production and local development environments.
-
-## Nginx Webserver
-Nginx is used to host static content and the site as a reverse proxy.
+## Nginx Web Server
+Nginx is used to serve static content and act as a reverse proxy for the site.
 
 
 ## Email Form
-I previously had `send_mail()` send emails to my primary address. However, Google is discontinuing password based logins. I will likely switch to OAuth based tokens for email when I find the time. Right now, the contact page redirects to my Linked in page.
+- I previously had `send_mail()` send emails to my primary address. However, Google is discontinuing password-based logins.
+- I rerouted to LinkedIn, as that is how most people will contact me.
 
 
 ## Git Usage
 
-I use branching similar to the [git_flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow#:~:text=What%20is%20Gitflow%3F,by%20Vincent%20Driessen%20at%20nvie.) method. There is a production branch and a development branch for features that get pushed into it.
+I use branching similar to the [Git Flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow#:~:text=What%20is%20Gitflow%3F,by%20Vincent%20Driessen%20at%20nvie.) method. There is a production branch and a development branch for features that get merged into it.
 
 
 ## Simplifying development
 
-An `aliases.sh` Bash script file is loaded to create shortcuts for common commands specific to the project, that I do not want to include in my personal `.bash_aliases` file.
+An `aliases.sh` Bash script is loaded to create shortcuts for common project-specific commands that I do not want to include in my personal `.bash_aliases` file.
+- I have moved to Makefiles in more recent projects
 
-
-
-## Citations on codebase
-The structure and design choice for the site were heavily based on the following sources. Much of the code from those tutorials was used as boiler plate
+## Citations for the codebase
+The structure and design choices for the site were heavily based on the following sources. Much of the code from those tutorials was used as boilerplate.
 
 - https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
 - https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/
