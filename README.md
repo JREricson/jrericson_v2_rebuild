@@ -33,8 +33,8 @@ Python, Django, Markdown, Nginx, Docker, Docker Compose, Linode, Bash, Bootstrap
 ![containers](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/refs/heads/main/documentation/containers.png)
 
 
-- Email-based contact form re-routing to my in box (deprecated)
-  - No longer implemented
+- Email-based contact form re-routing to my inbox(deprecated)
+     - No longer implemented
 
 ### AI usage
 Most of this code was written before I introduced agentic AI into my coding practices.
@@ -51,8 +51,8 @@ Projects are stored with a variety of attributes, such as ranking (used for orde
 Project descriptions are written in Markdown.
 - Converted to HTML using the `markdownify` library
 - Convenience
-    - Easy to write
-    - Easy to transfer info from READMEs in GitHub repos
+     - Easy to write
+     - Easy to transfer info from READMEs in GitHub repos
 - New projects are added through the admin console
 
 ![markdown ex](https://raw.githubusercontent.com/JREricson/jrericson_v2_rebuild/main/documentation/markup_description.png)
@@ -74,13 +74,13 @@ Projects are displayed and paginated through a Django `ListView`. Project descri
 
 ## Backups
 - Done with a manual checkpointing method
-  - Uses `django-dbbackup`, which provides a wrapper over Postgres's `pg_dump`.
-  - All backups are stored externally in an S3 bucket as described below.
-  - A previous version of the site used **cron jobs** to do this
+     - Uses `django-dbbackup`, which provides a wrapper over Postgres's `pg_dump`.
+     - All backups are stored externally in an S3 bucket as described below.
+     - A previous version of the site used **cron jobs** to do this
 
 - Design decision
-  - Backups could be done with a managed database
-  - Implemented this way for zero financial cost and simplicity
+     - Backups could be done with a managed database
+     - Implemented this way for zero financial cost and simplicity
 
 
 ## S3 storage
@@ -90,8 +90,8 @@ Projects are displayed and paginated through a Django `ListView`. Project descri
 ## Database: PostgreSQL
 
 - Why PostgreSQL:
-  - Cheap, easy, and familiar
-  - Wanted SQL
+     - Cheap, easy, and familiar
+     - Wanted SQL
 
 
 ## UI
@@ -104,9 +104,9 @@ Projects are displayed and paginated through a Django `ListView`. Project descri
 - Ubuntu server (LTS) using Linode: I am familiar with Debian distributions.
 - Single node
 - Remote access:
-  - SSH
-  - "Visual Studio Code Remote - SSH" extension
-  - Rsync (or SCP) for file transfers
+     - SSH
+     - "Visual Studio Code Remote - SSH" extension
+     - Rsync (or SCP) for file transfers
 
 ## Docker and Docker Compose
 Docker has been chosen to run the site for the following reasons.
